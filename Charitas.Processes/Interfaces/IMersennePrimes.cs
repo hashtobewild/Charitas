@@ -7,6 +7,6 @@ namespace Charitas.Processes.Interfaces
     {
         Task FindMersennePrimes(BigInteger start);
 
-        Task<bool> IsMersennePrime(BigInteger candidate);
+        bool IsMersennePrime(BigInteger candidate);
     }
 }
