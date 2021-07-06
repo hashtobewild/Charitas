@@ -1,8 +1,6 @@
 ﻿using Charitas.Processes.Interfaces;
 using Microsoft.Extensions.Logging;
-using Mpir.NET;
 using System;
-using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -53,11 +51,12 @@ namespace Charitas.Processes.Implemetations
         private void CancellableFindMersennePrimes(long start, CancellationToken token, IProgress<long> progress)
         {
             long working = start;
-            while (!token.IsCancellationRequested)
+            while (!token.IsCancellationRequested && working > 0)
             {
-                if (IsMersennePrime(working - 1))
+                var local = working - 1;
+                if (IsMersennePrime(local))
                 {
-                    progress.Report(working);
+                    progress.Report(local);
                 }
                 working *= 2;
             }

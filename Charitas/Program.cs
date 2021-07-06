@@ -75,6 +75,7 @@ namespace Charitas
         private void RunAllPrimes()
         {
             _primes.FindMersennePrimes(1);
+            Console.WriteLine("Complete!");
         }
 
         private void ShowOptions()
@@ -86,7 +87,7 @@ namespace Charitas
             Console.WriteLine("Options:");
             Console.WriteLine("--------");
             Console.WriteLine("1. Run the Mersenne Prime finder from the beginning");
-            Console.WriteLine("2. Run the Mersenne Prime finder from a specified offset");
+            //Console.WriteLine("2. Run the Mersenne Prime finder from a specified offset");
             Console.WriteLine("");
             Console.WriteLine("Q. Quit");
             Console.WriteLine("");
