@@ -10,18 +10,18 @@ namespace Charitas.Processes.Implemetations
 {
     public class MersennePrimes : IMersennePrimes
     {
-        private ILogger _logger;
+        private ILogger<MersennePrimes> _logger;
 
-        public MersennePrimes(ILogger logger)
+        public MersennePrimes(ILogger<MersennePrimes> logger)
         {
             _logger = logger;
         }
 
-        public async Task FindMersennePrimes(BigInteger start)
+        public async Task FindMersennePrimes(long start)
         {
             var _tokenSource = new CancellationTokenSource();
             var _token = _tokenSource.Token;
-            var progress = new Progress<BigInteger>(value =>
+            var progress = new Progress<long>(value =>
             {
                 _logger.LogInformation("Completed: " + value.ToString());
             });
@@ -29,16 +29,13 @@ namespace Charitas.Processes.Implemetations
             await Task.Run(() => CancellableFindMersennePrimes(start, _token, progress));
         }
 
-        public bool IsMersennePrime(BigInteger candidate)
+        public bool IsMersennePrime(long candidate)
         {
             if (candidate > 2)
             {
-                var working = new mpz_t(candidate.ToString());
-                var rop = new mpz_t();
-                mpir.mpz_sqrt(rop, working);
-                BigInteger convertedSquare = rop.ToBigInteger();
+                long convertedSquare = (long)Math.Sqrt(candidate);
                 // Only odd numbers
-                for (BigInteger i = 3; i < convertedSquare; i += 2)
+                for (long i = 3; i < convertedSquare; i += 2)
                 {
                     if (candidate % i == 0)
                     {
@@ -53,9 +50,9 @@ namespace Charitas.Processes.Implemetations
             }
         }
 
-        private void CancellableFindMersennePrimes(BigInteger start, CancellationToken token, IProgress<BigInteger> progress)
+        private void CancellableFindMersennePrimes(long start, CancellationToken token, IProgress<long> progress)
         {
-            BigInteger working = start;
+            long working = start;
             while (!token.IsCancellationRequested)
             {
                 if (IsMersennePrime(working - 1))

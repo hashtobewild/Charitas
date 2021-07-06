@@ -10,10 +10,12 @@ namespace Charitas
     public class Program
     {
         private ILogger<Program> _logger;
+        private IMersennePrimes _primes;
 
-        public Program(ILogger<Program> logger)
+        public Program(ILogger<Program> logger, IMersennePrimes primes)
         {
             _logger = logger;
+            _primes = primes;
         }
 
         public void Run()
@@ -45,6 +47,7 @@ namespace Charitas
             {
                 case "1":
                     {
+                        RunAllPrimes();
                     }
                     break;
 
@@ -67,6 +70,11 @@ namespace Charitas
             }
             // Restart the app loop
             ShowOptions();
+        }
+
+        private void RunAllPrimes()
+        {
+            _primes.FindMersennePrimes(1);
         }
 
         private void ShowOptions()
