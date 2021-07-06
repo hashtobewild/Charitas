@@ -1,4 +1,4 @@
-﻿namespace Chairtas.Processes.Interfaces
+﻿namespace Charitas.Processes.Interfaces
 {
     public interface IMersennePrimes
     {
