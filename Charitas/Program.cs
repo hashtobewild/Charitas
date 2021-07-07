@@ -51,11 +51,6 @@ namespace Charitas
                     }
                     break;
 
-                case "2":
-                    {
-                    }
-                    break;
-
                 case "q":
                     {
                         Environment.Exit(0);
@@ -87,7 +82,6 @@ namespace Charitas
             Console.WriteLine("Options:");
             Console.WriteLine("--------");
             Console.WriteLine("1. Run the Mersenne Prime finder from the beginning");
-            //Console.WriteLine("2. Run the Mersenne Prime finder from a specified offset");
             Console.WriteLine("");
             Console.WriteLine("Q. Quit");
             Console.WriteLine("");
