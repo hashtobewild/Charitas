@@ -39,6 +39,15 @@ namespace Charitas
             host.Services.GetRequiredService<Program>().Run();
         }
 
+        private void ListKnownPrimes()
+        {
+            Console.WriteLine("Known Mersenne Primes:");
+            foreach (var item in _primes.KnownValues)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
         private void ParseOptions(string input)
         {
             Console.Clear();
@@ -48,6 +57,18 @@ namespace Charitas
                 case "1":
                     {
                         RunAllPrimes();
+                    }
+                    break;
+
+                case "2":
+                    {
+                        RunKnownPrimes();
+                    }
+                    break;
+
+                case "3":
+                    {
+                        ListKnownPrimes();
                     }
                     break;
 
@@ -73,6 +94,14 @@ namespace Charitas
             Console.WriteLine("Complete!");
         }
 
+        private void RunKnownPrimes()
+        {
+            foreach (var item in _primes.KnownValues)
+            {
+                TimeRun(item);
+            }
+        }
+
         private void ShowOptions()
         {
             Console.WriteLine("");
@@ -82,12 +111,22 @@ namespace Charitas
             Console.WriteLine("Options:");
             Console.WriteLine("--------");
             Console.WriteLine("1. Run the Mersenne Prime finder from the beginning");
+            Console.WriteLine("2. Check known Mersenne Primes");
+            Console.WriteLine("3. List known Mersenne Primes");
             Console.WriteLine("");
             Console.WriteLine("Q. Quit");
             Console.WriteLine("");
             Console.WriteLine("(Enter the number matching your choice and press enter, to continue)");
             Console.WriteLine("");
             ParseOptions(Console.ReadLine());
+        }
+
+        private void TimeRun(int candidate)
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var output = _primes.IsMersennePrime(candidate);
+            watch.Stop();
+            Console.WriteLine("Runtime: " + watch.Elapsed.ToString() + " Candidate: " + candidate.ToString() + " Result: " + output.ToString());
         }
     }
 }
