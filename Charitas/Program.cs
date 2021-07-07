@@ -112,7 +112,7 @@ namespace Charitas
             Console.WriteLine("--------");
             Console.WriteLine("1. Run the Mersenne Prime finder from the beginning");
             Console.WriteLine("2. Check known Mersenne Primes");
-            Console.WriteLine("3. List known Mersenne Primes");
+            Console.WriteLine("3. List known Mersenne Prime Exponents");
             Console.WriteLine("");
             Console.WriteLine("Q. Quit");
             Console.WriteLine("");
@@ -126,7 +126,7 @@ namespace Charitas
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var output = _primes.IsMersennePrime(candidate);
             watch.Stop();
-            Console.WriteLine("Runtime: " + watch.Elapsed.ToString() + " Candidate: " + candidate.ToString() + " Result: " + output.ToString());
+            Console.WriteLine("Runtime: " + watch.Elapsed.ToString() + " Exponent: " + candidate.ToString() + " Candidate: " + (candidate - 1).ToString() + " Result: " + output.ToString());
         }
     }
 }
