@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Numerics;
 
 namespace Charitas
 {
@@ -126,7 +127,10 @@ namespace Charitas
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var output = _primes.IsMersennePrime(candidate);
             watch.Stop();
-            Console.WriteLine("Runtime: " + watch.Elapsed.ToString() + " Exponent: " + candidate.ToString() + " Candidate: " + (candidate - 1).ToString() + " Result: " + output.ToString());
+            Console.WriteLine("Runtime: " + watch.Elapsed.ToString());
+            Console.WriteLine("Exponent: " + candidate.ToString());
+            Console.WriteLine("Candidate:\n" + (BigInteger.Pow(new BigInteger(2), candidate) - 1).ToString());
+            Console.WriteLine("");
         }
     }
 }
