@@ -1,12 +1,14 @@
-# Innumerati
-Roman Numerals (console application)
+# Charitas
+Mersenne Primes (console application)
+
+"Charitas" is the motto of the Minims (the religios order that Marin(us) Mersenne belonged to)
 
 I declare that this is my own work :)
 -Loki
 
 # Discussion:
 
-The largest limitations of this algorithm and implementation stem from the nature of the data that is being processed. The data gets larger with each increase in the candidate size and nature of the primality check does not obviously lend itself to desktop or even server CPU based multi-threading. 
+The largest limitations of this algorithm and implementation stem from the nature of the data that is being processed and the mostly linear processing path. The data gets larger with each increase in the candidate size and nature of the primality check does not obviously lend itself to desktop or even server CPU based multi-threading. 
 
 The reason for this is that the calculations are performed on relatively large chunks of data that easily flood the CPU caches, diminishing the returns of muti threading.
 
@@ -18,5 +20,5 @@ To add context, the 51st Mersenne Prime is 2^82589932... a number with 24'862'04
 
 Next step improvements would be to swap out the standard division operations (including the modular math and square root calculation) with bit shifting, but I would need to google the heck out of that, because it is not trivial. 
 
-Anecdotally, I am sure that C# is **much** slower than Python in this task. It feels even slower thanJavaScript, which is not great. For a "production" solution, I'd probably use a very different technology stack - likely GPGPU or FPGA based, once the bit shifting math is in place.
+Anecdotally, I am sure that C# is **much** slower than Python in this task. It feels even slower than JavaScript, which is not great. For a "production" solution, I'd probably use a very different technology stack - likely GPGPU or FPGA based, once the bit shifting math is in place.
 
