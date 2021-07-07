@@ -1,7 +1,7 @@
 # Charitas
 Mersenne Primes (console application)
 
-"Charitas" is the motto of the Minims (the religios order that Marin(us) Mersenne belonged to)
+"Charitas" is the motto of the Minims (the religious order that Marin(us) Mersenne belonged to)
 
 I declare that this is my own work :)
 -Loki
