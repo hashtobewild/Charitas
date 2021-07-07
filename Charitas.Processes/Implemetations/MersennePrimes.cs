@@ -38,6 +38,10 @@ namespace Charitas.Processes.Implemetations
 
         public bool IsMersennePrime(int candidate)
         {
+            if (candidate <= 0)
+            {
+                return false;
+            }
             if (candidate % 2 == 0)
             {
                 // Lehmertest only works for odd primes (except 2)
