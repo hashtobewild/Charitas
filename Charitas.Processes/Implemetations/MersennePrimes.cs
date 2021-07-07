@@ -1,6 +1,7 @@
 ﻿using Charitas.Processes.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +16,11 @@ namespace Charitas.Processes.Implemetations
             _logger = logger;
         }
 
-        public async Task FindMersennePrimes(long start)
+        public MersennePrimes()
+        {
+        }
+
+        public async Task FindMersennePrimes(int start)
         {
             var _tokenSource = new CancellationTokenSource();
             var _token = _tokenSource.Token;
@@ -27,38 +32,49 @@ namespace Charitas.Processes.Implemetations
             await Task.Run(() => CancellableFindMersennePrimes(start, _token, progress));
         }
 
-        public bool IsMersennePrime(long candidate)
+        public bool IsMersennePrime(int candidate)
         {
-            if (candidate > 2)
+            if (candidate == 1)
             {
-                long convertedSquare = (long)Math.Sqrt(candidate);
-                // Only odd numbers
-                for (long i = 3; i < convertedSquare; i += 2)
+                return true;
+            }
+            else if (candidate % 2 == 0)
+            {
+                // Lehmertest only works for odd primes (except 2)
+                return candidate == 2 ? true : false;
+            }
+            else
+            {
+                BigInteger mersenneCandidate = BigInteger.Pow(new BigInteger(2), candidate) - 1;
+                BigInteger sequence = new BigInteger(4);
+                // do for odd numbers up to t he square root of the candidate only
+                for (int i = 3; i <= (int)Math.Sqrt(candidate); i += 2)
                 {
+                    // check divisibility
                     if (candidate % i == 0)
                     {
                         return false;
                     }
+                    for (int j = 3; j <= candidate; j++)
+                    {
+                        sequence = (sequence * sequence - new BigInteger(2)) % mersenneCandidate;
+                    }
                 }
-                return true;
-            }
-            else
-            {
-                return true;
+                return sequence == 0;
             }
         }
 
-        private void CancellableFindMersennePrimes(long start, CancellationToken token, IProgress<long> progress)
+        private void CancellableFindMersennePrimes(int start, CancellationToken token, IProgress<long> progress)
         {
-            long working = start;
-            while (!token.IsCancellationRequested && working > 0)
+            int working = start;
+            while (!token.IsCancellationRequested)
             {
-                var local = working - 1;
+                var local = working;
                 if (IsMersennePrime(local))
                 {
                     progress.Report(local);
                 }
-                working *= 2;
+                working++;
             }
         }
     }

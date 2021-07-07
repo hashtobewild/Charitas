@@ -4,8 +4,8 @@ namespace Charitas.Processes.Interfaces
 {
     public interface IMersennePrimes
     {
-        Task FindMersennePrimes(long start);
+        Task FindMersennePrimes(int start);
 
-        bool IsMersennePrime(long candidate);
+        bool IsMersennePrime(int candidate);
     }
 }
