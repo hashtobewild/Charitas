@@ -42,7 +42,7 @@ namespace Charitas
         private void ListKnownPrimes()
         {
             Console.WriteLine("Known Mersenne Primes:");
-            foreach (var item in _primes.KnownValues)
+            foreach (var item in _primes.KnownExponentValues)
             {
                 Console.WriteLine(item.ToString());
             }
@@ -96,7 +96,7 @@ namespace Charitas
 
         private void RunKnownPrimes()
         {
-            foreach (var item in _primes.KnownValues)
+            foreach (var item in _primes.KnownExponentValues)
             {
                 TimeRun(item);
             }

@@ -5,7 +5,7 @@ namespace Charitas.Processes.Interfaces
 {
     public interface IMersennePrimes
     {
-        List<int> KnownValues { get; set; }
+        List<int> KnownExponentValues { get; set; }
 
         Task FindMersennePrimes(int start);
 

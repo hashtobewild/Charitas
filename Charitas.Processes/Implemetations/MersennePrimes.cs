@@ -22,7 +22,7 @@ namespace Charitas.Processes.Implemetations
             DefaultFactory();
         }
 
-        public List<int> KnownValues { get; set; }
+        public List<int> KnownExponentValues { get; set; }
 
         public async Task FindMersennePrimes(int start)
         {
@@ -38,31 +38,32 @@ namespace Charitas.Processes.Implemetations
 
         public bool IsMersennePrime(int candidate)
         {
-            if (candidate == 1)
-            {
-                return true;
-            }
-            else if (candidate % 2 == 0)
+            if (candidate % 2 == 0)
             {
                 // Lehmertest only works for odd primes (except 2)
                 return candidate == 2 ? true : false;
             }
+            else if (candidate == 1 || candidate == 3 || candidate == 5 || candidate == 7)
+            {
+                return true;
+            }
             else
             {
-                BigInteger mersenneCandidate = BigInteger.Pow(new BigInteger(2), candidate) - 1;
+                BigInteger mersenneCandidate = BigInteger.Pow(new BigInteger(2), candidate) - new BigInteger(1);
                 BigInteger sequence = new BigInteger(4);
-                // do for odd numbers up to t he square root of the candidate only
-                for (int i = 3; i <= (int)Math.Sqrt(candidate); i += 2)
+                // do for odd numbers up to the square root of the candidate only
+                var squareRoot = (int)Math.Ceiling(Math.Sqrt(candidate));
+                for (int i = 3; i <= squareRoot; i += 2)
                 {
                     // check divisibility
                     if (candidate % i == 0)
                     {
                         return false;
                     }
-                    for (int j = 3; j <= candidate; j++)
-                    {
-                        sequence = (sequence * sequence - new BigInteger(2)) % mersenneCandidate;
-                    }
+                }
+                for (int j = 3; j <= candidate; j++)
+                {
+                    sequence = (sequence * sequence - new BigInteger(2)) % mersenneCandidate;
                 }
                 return sequence == 0;
             }
@@ -84,7 +85,7 @@ namespace Charitas.Processes.Implemetations
 
         private void DefaultFactory()
         {
-            KnownValues = new List<int>()
+            KnownExponentValues = new List<int>()
             {
                 2,
                 3,
