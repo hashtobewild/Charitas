@@ -3,9 +3,6 @@ Mersenne Primes (console application)
 
 "Charitas" is the motto of the Minims (the religious order that Marin(us) Mersenne belonged to)
 
-I declare that this is my own work :)
--Loki
-
 # Discussion:
 
 The largest limitations of this algorithm and implementation stem from the nature of the data that is being processed and the mostly linear processing path. The data gets larger with each increase in the candidate size and nature of the primality check does not obviously lend itself to desktop or even server CPU based multi-threading. 
